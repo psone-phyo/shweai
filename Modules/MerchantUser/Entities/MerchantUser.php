@@ -18,10 +18,14 @@ class MerchantUser extends Model
      */
     protected $table = Table::MERCHANT_USER;
 
-    protected $fillable = ["id", "merchant_id", "mobile", "nrc", "active", "created_by"];
+    protected $fillable = ["id", "merchant_id", "user_id", "mobile", "nrc", "active", "created_by"];
 
     public function createdUser(){
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function merchant(){

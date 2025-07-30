@@ -17,6 +17,7 @@ class CreateMerchantuserTable extends Migration
         Schema::create(Table::MERCHANT_USER, function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('merchant_id');
+            $table->unsignedInteger('user_id');
             $table->string('mobile');
             $table->string('nrc');
             $table->boolean('active')->default(1);
