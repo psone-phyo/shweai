@@ -1,0 +1,63 @@
+
+.grid:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.grid-item {
+    width: 160px;
+    display: inline-block;
+}
+
+.beauty-number {
+    font-weight: bold;
+    color: #3da93d;
+    display: block;
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    font-size: 15px;
+}
+
+.widget-flat {
+    color: #B6D554;
+    background: #183F35;
+    border-radius: 20px;
+}
+
+.report {
+    background: #183F35;
+    border-radius: 20px;
+}
+
+.table-report {
+    border-radius: 20px;
+    border: #183F35 solid 4px;
+}
+
+.card-title {
+    color: #d1ecdd;
+}
+
+.card-per,
+.p-icon {
+    color: #d1ecdd;
+    font-size: 0.5rem;
+}
+
+.fw-normal {
+    font-size: 1rem;
+}
+
+.c1-col,
+.c2-col {
+    width: 100%;
+    height: 150px;
+    position: relative;
+    ;
+}
+
+.c1-col {
+    text-align: -webkit-center
+}

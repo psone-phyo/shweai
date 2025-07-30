@@ -1,0 +1,325 @@
+:root {
+    --padesar-primary-color: #226440;
+    --padesar-secondary-color: #7fc95e;
+    --padesar-primary-text-color: #183F35;
+    --padesar-secondary-text-color: #d1ecdd;
+    --padesar-bg-primary: #D1ECDD;
+}
+
+.fs-40 {
+    font-size: 40px;
+}
+
+.fs-larger {
+    font-size: larger;
+}
+
+.fs-smaller{
+    font-size: smaller !important;
+}
+
+.fs-xs{
+    font-size: x-small;
+}
+
+.fs-xxs{
+    font-size: xx-small;
+}
+
+.fs-3vw{
+    font-size: 3vw;
+}
+
+
+.fs-xl {
+    font-size: x-large;
+}
+
+.fs-22{
+    font-size: 23px  !important;
+}
+
+.fs-14{
+    font-size: 15px !important;
+}
+
+.fw-int{
+    font-weight: initial !important;
+}
+
+.fw-lighter{
+    font-weight: lighter !important;
+}
+
+.mt-15px {
+    margin-top: 15px;
+}
+
+.mb-15px {
+    margin-bottom: 15px;
+}
+
+.text-padesar-secondary {
+    color: var(--padesar-secondary-text-color) !important;
+}
+
+.text-padesar-primary {
+    color: var(--padesar-primary-text-color) !important;
+}
+
+.text-padesar-footer{
+    color: #82C55B;
+}
+
+.w-max{
+    width: max-content !important;
+    text-wrap: nowrap;
+}
+
+.btn-padesar-primary {
+    background: var(--padesar-primary-text-color);
+    color: var(--padesar-secondary-text-color);
+    border-radius: 20px;
+    padding: 5px 15px;
+    outline: none;
+    border: none;
+    text-transform: uppercase;
+}
+
+.bg-padesar-primary {
+    background: var(--padesar-bg-primary);
+}
+
+.btn-padesar-primary:hover {
+    background: var(--padesar-secondary-color);
+    color: var(--padesar-primary-text-color);
+}
+
+.btn-padesar-primary:focus,
+.btn-padesar-secondary:focus,
+.btn-padesar-secondary-nohover:focus {
+    outline: none;
+    border: none;
+}
+
+.btn-padesar-secondary,
+.btn-padesar-secondary-nohover {
+    background: var(--padesar-secondary-color);
+    color: var(--padesar-secondary-text-color);
+    border-radius: 20px;
+    padding: 5px 15px;
+    outline: none;
+    border: none;
+    text-transform: uppercase;
+}
+
+.btn-padesar-secondary:hover {
+    background: var(--padesar-primary-color);
+    color: var(--padesar-secondary-color);
+}
+
+.text-container {
+    max-height: 6rem;
+    /* Adjust to the height of 3 lines or desired height */
+    overflow: hidden;
+    position: relative;
+}
+
+.truncated-text {
+    overflow: hidden;
+    white-space: nowrap;
+    max-height: 6rem;
+    text-overflow: ellipsis;
+}
+
+.opacity-50 {
+    opacity: .5;
+}
+
+
+.amount>del,
+del>small {
+    color: var(--padesar-secondary-color) !important;
+    font-size: 14px;
+}
+
+.amount>small {
+    font-size: 12px;
+}
+
+.swal2-confirm.swal2-styled {
+    background: var(--padesar-secondary-color) !important;
+}
+
+
+/* Movie View Start  */
+
+.mobile-pagination {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 80px
+}
+
+.mobile-pagination-link {
+    background-color: white;
+    color: black;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0px 3px
+}
+
+.mobile-pagination-active {
+    background-color: #28AB55;
+    color: white !important;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0px 3px
+}
+
+.mobile-pagination-active>a {
+    color: white !important;
+}
+
+
+/* Web View Start  */
+
+.discount-label {
+    font-size: small;
+    background: red;
+    color: white;
+    z-index: 10;
+    width: 100%;
+    text-align: center;
+    transform: rotate(-45deg);
+    /* transform-origin: 20% 0%; */
+    left: -70px;
+    top: 25px;
+}
+
+.shadow-1{
+    box-shadow: 1px 1px 1px 1px #0f0f0a !important;
+}
+
+.line{
+    height: 1px;
+    background-color: var(--padesar-primary-color);
+}
+
+.productCardAddCartBtn {
+    height: 35px !important;
+    font-size: 12px !important;
+    line-height: 35px !important;
+}
+
+.lovato{
+    font-family: Lovato !important;
+}
+
+.poppin{
+    font-family: "Poppins";
+}
+
+
+/* Responsive styles for tablets and larger screens */
+@media (min-width: 768px) {
+    .mobile-pagination-link {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .mobile-pagination-active {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+    }
+}
+
+.custom-card {
+    border-radius: 10px;
+    border: 2px solid #183F35;
+    background: #D1ECDD;
+}
+
+.custom-card-img-top {
+    padding: 4px;
+    border-radius: 14px;
+    height: 275px !important;
+}
+
+.custom-card-title {
+    margin-top: 0px;
+    margin-bottom: 0px !important;
+}
+
+.btn-custom {
+    border-radius: 20px;
+    background: #183F35;
+    color: #d1ecdd;
+    width: 145px;
+}
+
+.btn-custom-mobile {
+    border-radius: 20px;
+    background: #183F35;
+    color: #d1ecdd;
+    width: 165px;
+}
+
+.btn-custom:hover {
+    background: #2a5f51;
+}
+
+/* styles.css */
+.custom-modal-content {
+    border-radius: 10px !important;
+}
+
+.custom-modal-title {
+    font-size: 16px;
+}
+
+#couponImage {
+    height: 353px;
+    width: 100%;
+}
+
+#couponImageMobile {
+    height: 244px;
+    width: 100%;
+}
+
+#couponCode {
+    border: 1px solid #183F35;
+    font-size: 20px;
+    padding: 11px;
+    width: 200px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+.text-brake{
+    white-space: normal;
+    text-wrap: wrap;
+    word-break: break-word;
+}
+
+.copy-message {
+    display: none;
+    background-color: var(--padesar-secondary-color);
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+}

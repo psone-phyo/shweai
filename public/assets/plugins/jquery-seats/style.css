@@ -1,0 +1,121 @@
+/*body {
+	font-family: 'Lato', sans-serif;
+}
+a {
+	color: #b71a4c;
+}
+*/.front-indicator {
+    background-color: #e85147;
+    border-radius: 5px;
+    color: #fff;
+    margin: 5px 40px 0;
+    padding: 3px;
+    text-align: center;
+}
+/*.wrapper {
+	width: 100%;
+	text-align: center;
+}
+.container {
+	margin: 0 auto;
+	width: 500px;
+	text-align: left;
+}*/
+.booking-details {
+	float: left;
+	text-align: left;
+	margin-left: 35px;
+	font-size: 12px;
+	position: relative;
+	height: 450px;
+}
+.booking-details h2 {
+	margin: 25px 0 20px 0;
+	font-size: 17px;
+}
+.booking-details h3 {
+	margin: 5px 5px 0 0;
+	font-size: 14px;
+}
+div.seatCharts-cell {
+	color: #182C4E !important;
+	height: 25px !important;
+	width: 50px !important;
+	line-height: 25px !important;
+
+}
+div.seatCharts-seat {
+	color: #FFFFFF !important;
+	cursor: pointer !important;
+}
+div.seatCharts-row {
+	height: 35px !important;
+}
+div.seatCharts-seat.available {
+	background-color: green;
+
+}
+div.seatCharts-seat.blocked {
+	background-color: #C13726;
+
+}
+div.seatCharts-seat.available.first-class {
+/* 	background: url(vip.png); */
+	background-color: #3a78c3;
+}
+div.seatCharts-seat.focused {
+	background-color: #76B474;
+}
+div.seatCharts-seat.booking {
+	background-color: #CCCCCC;
+}
+div.seatCharts-seat.selected {
+	background-color: #FF0400;
+}
+div.seatCharts-seat.unavailable {
+	background-color: #472B34;
+}
+div.seatCharts-seat.for-user {
+        background-color: blue;
+}
+div.seatCharts-container {
+	/*border-right: 1px dotted #adadad;*/
+	/*width: 200px;*/
+	padding: 5px 20px 20px 20px;
+	/*float: right;*/
+}
+div.seatCharts-legend {
+	padding-left: 0px;
+	/*position: absolute;*/
+	bottom: 16px;
+}
+ul.seatCharts-legendList {
+	padding-left: 0px;
+}
+span.seatCharts-legendDescription {
+	margin-left: 5px;
+	line-height: 30px;
+}
+.driverplace{
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+}
+.checkout-button {
+/*	display: block;
+	margin: 10px 0;
+	font-size: 14px;*/
+}
+#selected-seats {
+/*	max-height: 90px;
+	overflow-y: scroll;
+	overflow-x: none;*/
+	/*width: 170px;*/
+}
+#driver{
+    text-align: center;
+    background-color: darkgreen;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}

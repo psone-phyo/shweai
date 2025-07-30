@@ -1,0 +1,23 @@
+{
+    "name": "Zawmyolatt/merchant",
+    "description": "",
+    "authors": [
+        {
+            "name": "Zaw Myo Latt",
+            "email": "Zawmyolatt.ucsy@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Merchant\\": ""
+        }
+    }
+}
