@@ -2,8 +2,9 @@
 
 namespace Modules\Merchant\Http\Controllers;
 
-use Illuminate\Routing\Controller;
 use DataTables;
+use Carbon\Carbon;
+use Illuminate\Routing\Controller;
 use Modules\Merchant\Repositories\MerchantRepository;
 use Modules\Merchant\Http\Requests\ManageMerchantRequest;
 
@@ -29,11 +30,29 @@ class MerchantTableController extends Controller
      */
     public function __invoke(ManageMerchantRequest $request)
     {
-        return DataTables::of($this->merchant->getForDataTable())
+        $input = $request->all();
+        logger($input);
+        return DataTables::of($this->merchant->getForDataTable($input))
             ->addColumn('actions', function ($merchant) {
                 return $merchant->action_buttons;
             })
-            ->rawColumns(['actions'])
+            ->editColumn('status', function ($merchant) {
+                return $merchant->status_label;
+            })
+            ->editColumn('active', function ($merchant) {
+                if ($merchant->active) {
+                    return '<span class="badge badge-success">Active</span>';
+                } else {
+                    return '<span class="badge badge-danger">Inactive</span>';
+                }
+            })
+            ->editColumn('approved_at', function ($merchant) {
+                return $merchant->approved_at ? Carbon::parse($merchant->approved_at)->format('Y-m-d H:i:s') : '-';
+            })
+            ->editColumn('updated_at', function ($merchant) {
+                return $merchant->updated_at->format('Y-m-d H:i:s');
+            })
+            ->rawColumns(['actions', 'status', 'active'])
             ->make(true);
     }
 }

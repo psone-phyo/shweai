@@ -20,29 +20,58 @@ return [
                     'list'       => 'Merchant List',
                     'show'       => 'Merchant Detail',
 
+                    'inactive_management' => 'Inactive Merchant Management',
+                    'inactive_list'       => 'Inactive Merchant List',
+
+                    'suspended_management' => 'Suspended Merchant Management',
+                    'suspended_list'       => 'Suspended Merchant List',
+
+                    'rejected_management'  => 'Rejected Merchant Management',
+                    'rejected_list'        => 'Rejected Merchant List',
+
+                    'merchant_ownership' => 'Merchant Management Ownership Member',
+
                     'table' => [
                         'number_of_users' => 'Number of Merchants',
                         'sort'             => 'Sort',
                         'id'               => 'ID',
-                        'name'             => 'Name',
                         'description'      => 'Description',
                         'created'          => 'Created',
                         'last_updated'     => 'Last Updated',
                         'total'            => 'merchant total|merchant total',
                         'actions'          => 'Actions',
-                    ],
 
-                    'create' => 'Create Merchant',
-                    'table' => [
+                        'password' => 'Password',
+                        'password_confirmation' => "Password Confirmation",
                         'name' => 'Name',
-                        'mm_name' => 'Name(in Burmese)',
+                        'company_name' => 'Company Name',
+                        'mm_company_name' => 'Company Name(in Burmese)',
                         'business_name' => 'Business Name',
                         'mm_business_name' => 'Bussiness Name(in Burmese)',
+                        'bussiness_email' => 'Bussiness Email',
+                        'bussiness_mobile' => "Bussiness Mobile",
                         'email' => 'Email',
                         'phone' => 'Phone',
                         'address' => 'Address',
                         'status' => 'Status',
+                        'active' => 'Active',
+                        'inactive' => "Inactive",
+                        'latitude' => 'Latitude',
+                        'longitude' => 'Longitude',
+                        'choose_location' => "Choose Location",
+                        'location'  => 'Location',
+                        'created_by' => 'Created User',
+                        'last_updated_by' => 'Last Updated User',
+                        'approved_at' => 'Approved At',
+                        'registration_number' => 'Bussiness Registration Number/ID',
+                        'website_url' => 'Bussiness Website URL',
+                        'approximate_sale' => 'Approximate Sale',
+                        'merchant' => 'Merchant',
+                        'mobile' => 'Mobile',
+                        'nrc' => 'NRC'
                     ],
+
+                    'create' => 'Create Merchant',
                     'status' => [
                         'pending' => 'Pending',
                         'approved' => 'Approved',

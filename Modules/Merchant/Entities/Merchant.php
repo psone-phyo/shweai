@@ -3,7 +3,9 @@
 namespace Modules\Merchant\Entities;
 
 use App\Enums\Table;
+use App\Domains\Auth\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Merchant\Enums\MerchantStatus;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Merchant extends Model
@@ -21,15 +23,36 @@ class Merchant extends Model
         'mm_name',
         'business_name',
         'mm_business_name',
-        'email',
-        'phone',
+        'bussiness_email',
+        'bussiness_mobile',
         'address',
         'status',
+        'active',
+        'latitude',
+        'longitude',
         'created_by',
-        'approved_by',
+        'last_updated_by',
         'approved_at',
     ];
 
+    public function createdUser(){
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function updatedUser(){
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function getStatusLabelAttribute()
+    {
+        $statuses = [
+            MerchantStatus::ID_PENDING  => '<span class="badge badge-warning">Pending</span>',
+            MerchantStatus::ID_APPROVED => '<span class="badge badge-success">Approved</span>',
+            MerchantStatus::ID_REJECTED => '<span class="badge badge-danger">Rejected</span>',
+            MerchantStatus::ID_SUSPENDED => '<span class="badge badge-secondary">Suspended</span>',
+        ];
+    return $statuses[$this->status] ?? 'Unknown';
+    }
        /**
      * @return string
      */
@@ -67,11 +90,53 @@ class Merchant extends Model
         return '';
     }
 
+    public function getSuspendButtonAttribute(){
+        if (auth()->user()->can('admin.access.merchant.suspend')) {
+            return '<a href="'.route('admin.merchant.suspend', $this).'" data-method="get"
+                 data-trans-button-cancel="'.__('buttons.general.cancel').'"
+                 data-trans-button-confirm="'.__('buttons.general.crud.suspend').'"
+                 data-trans-title="'.__('strings.backend.general.are_you_sure').'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.suspend').'" class="btn btn-dark btn-sm"><i class="fas fa-stop" style="color: #fff;"></i>&nbsp;<span style="color: #fff;">Suspend</span></a> ';
+        }
+
+        return '';
+    }
+
+    public function getUnsuspendButtonAttribute(){
+        if (auth()->user()->can('admin.access.merchant.suspend')) {
+            return '<a href="'.route('admin.merchant.suspend', $this).'" data-method="get"
+                 data-trans-button-cancel="'.__('buttons.general.cancel').'"
+                 data-trans-button-confirm="'.__('buttons.general.crud.unsuspend').'"
+                 data-trans-title="'.__('strings.backend.general.are_you_sure').'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.unsuspend').'" class="btn btn-success btn-sm"><i class="fas fa-stop" style="color: #fff;"></i>&nbsp;<span style="color: #fff;">Unsuspend</span></a> ';
+        }
+
+        return '';
+    }
+
+
+    public function getRejectButtonAttribute(){
+        if (auth()->user()->can('admin.access.merchant.reject')) {
+            return '<a href="'.route('admin.merchant.reject', $this).'" data-method="get"
+                 data-trans-button-cancel="'.__('buttons.general.cancel').'"
+                 data-trans-button-confirm="'.__('buttons.general.crud.reject').'"
+                 data-trans-title="'.__('strings.backend.general.are_you_sure').'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.reject').'" class="btn btn-warning btn-sm"><i class="fas fa-ban" style="color: #fff;"></i>&nbsp;<span style="color: #fff;">Reject</span></a> ';
+        }
+
+        return '';
+    }
+
     /**
      * @return string
      */
     public function getActionButtonsAttribute()
     {
-            return $this->getShowButtonAttribute().' '.$this->getEditButtonAttribute().' '.$this->getDeleteButtonAttribute();
+            $buttons = $this->getShowButtonAttribute().' '.$this->getEditButtonAttribute().' '.$this->getDeleteButtonAttribute();
+            if ($this->status == MerchantStatus::ID_PENDING) {
+                return $buttons.' '.$this->getRejectButtonAttribute();
+            }elseif ($this->status == MerchantStatus::ID_APPROVED) {
+                return $buttons.' '.$this->getSuspendButtonAttribute();
+            } elseif ($this->status == MerchantStatus::ID_SUSPENDED) {
+                return $buttons.' '.$this->getUnsuspendButtonAttribute();
+            }
+            return $buttons;
     }
 }

@@ -9,6 +9,8 @@
 @push('after-styles')
     {{ style("https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css") }}
     {{ style('assets/plugins/sweetalert2/sweetalert2.min.css') }}
+    {{ style('assets/plugins/select2/css/select2.min.css') }}
+    {{ style('assets/plugins/select2/css/select2-bootstrap.min.css') }}
 @endpush
 
 @section('content')
@@ -17,7 +19,22 @@
         <div class="row">
             <div class="col-sm-5">
                 <h4 class="card-title mb-0">
-                    {{ __('merchant::labels.backend.merchant.management') }} <small class="text-muted">{{ __('merchant::labels.backend.merchant.list') }}</small>
+                    @if ($type == 'rejected')
+                        {{ __('merchant::labels.backend.merchant.rejected_management') }}
+                        <small class="text-muted">{{ __('merchant::labels.backend.merchant.rejected_list') }}</small>
+                    @elseif ($type == 'suspended')
+                        {{ __('merchant::labels.backend.merchant.suspended_management') }}
+                        <small class="text-muted">{{ __('merchant::labels.backend.merchant.suspended_list') }}</small>
+                    @elseif ($type == 'pending')
+                        {{ __('merchant::labels.backend.merchant.inactive_management') }}  {{-- or pending_management if you have --}}
+                        <small class="text-muted">{{ __('merchant::labels.backend.merchant.inactive_list') }}</small>
+                    @elseif ($type == 'approved')
+                        {{ __('merchant::labels.backend.merchant.management') }}
+                        <small class="text-muted">{{ __('merchant::labels.backend.merchant.list') }}</small>
+                    @else
+                        {{ __('merchant::labels.backend.merchant.management') }}
+                        <small class="text-muted">{{ __('merchant::labels.backend.merchant.list') }}</small>
+                    @endif
                 </h4>
             </div><!--col-->
 
@@ -27,15 +44,33 @@
         </div><!--row-->
 
         <div class="row mt-4">
+            <div class="col-md-3">
+                <select name="active" id="active" class="form-control select2 changeSearch">
+                    <option value="1">{{ __('merchant::labels.backend.merchant.table.active') }}</option>
+                    <option value="0">{{ __('merchant::labels.backend.merchant.table.inactive') }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mt-4">
             <div class="col">
                 <div class="table-responsive">
                     <table id="merchant-table" class="table table-condensed table-hover">
                         <thead>
-                        <tr>
-                            <th>{{ __('merchant::labels.backend.merchant.table.id') }}</th>
-                            <th>{{ __('merchant::labels.backend.merchant.table.last_updated') }}</th>
-                            <th>{{ __('merchant::labels.backend.merchant.table.actions') }}</th>
-                        </tr>
+                            <tr>
+                                <th>{{ __('merchant::labels.backend.merchant.table.id') }}</th>
+                                <th>{{ __('merchant::labels.backend.merchant.table.name') }}</th>
+                                <th>{{ __('merchant::labels.backend.merchant.table.business_name') }}</th>
+                                <th>{{ __('merchant::labels.backend.merchant.table.email') }}</th>
+                                <th>{{ __('merchant::labels.backend.merchant.table.phone') }}</th>
+                                <th>{{ __('merchant::labels.backend.merchant.table.status') }}</th>
+                                <th>{{ __('merchant::labels.backend.merchant.table.active') }}</th>
+                                <th>{{ __('merchant::labels.backend.merchant.table.created_by') }}</th>
+                                <th>{{ __('merchant::labels.backend.merchant.table.last_updated_by') }}</th>
+                                <th>{{ __('merchant::labels.backend.merchant.table.approved_at') }}</th>
+                                <th>{{ __('merchant::labels.backend.merchant.table.last_updated') }}</th>
+                                <th>{{ __('merchant::labels.backend.merchant.table.actions') }}</th>
+                            </tr>
                         </thead>
                     </table>
                 </div>
@@ -50,6 +85,8 @@
     {{ script("js/backend/plugin/datatables/dataTables.bootstrap4.min.js") }}
     <!-- {{ script("js/backend/plugin/datatables/dataTables-extend.js") }} -->
     {{ script('assets/plugins/sweetalert2/sweetalert2.all.min.js')}}
+    {{ script('assets/plugins/select2/js/select2.full.min.js')}}
+    {{ script("assets/plugins/select2/component/components-select2.js") }}
 
     <script>
         $(function() {
@@ -63,6 +100,10 @@
                 ajax: {
                     url: '{!! route("admin.merchant.get") !!}',
                     type: 'post',
+                    data: function (d) {
+                        d.type = '{{ $type }}';
+                        d.active = $('#active').val();
+                    },
                     error: function (xhr, err) {
                         if (err === 'parsererror')
                             location.reload();
@@ -71,6 +112,15 @@
                 },
                 columns: [
                     {data: 'id', name: 'id'},
+                    {data: 'name', name: 'name'},
+                    {data: 'business_name', name: 'business_name'},
+                    {data: 'email', name: 'email'},
+                    {data: 'phone', name: 'phone'},
+                    {data: 'status', name: 'status'},
+                    {data: 'active', name: 'active'},
+                    {data: 'created_user.name', name: 'created_user.name', searchable: false},
+                    {data: 'updated_user.name', name: 'updated_user.name', searchable: false},
+                    {data: 'approved_at', name: 'approved_at'},
                     {data: 'updated_at', name: 'updated_at'},
                     {data: 'actions', name: 'actions', searchable: false, sortable: false}
                 ],
@@ -79,6 +129,10 @@
                 fnDrawCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                     load_plugins();
                 }
+            });
+
+            $('.changeSearch').on('change', function() {
+                $('#merchant-table').DataTable().ajax.reload();
             });
         });
     </script>

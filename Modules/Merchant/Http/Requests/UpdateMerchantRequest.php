@@ -2,6 +2,7 @@
 
 namespace Modules\Merchant\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateMerchantRequest extends FormRequest
@@ -14,9 +15,28 @@ class UpdateMerchantRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'             => ['required', 'string', 'max:191'],
+            'mm_name'          => ['nullable', 'string', 'max:191'],
+            'business_name'    => ['nullable', 'string', 'max:191'],
+            'mm_business_name' => ['nullable', 'string', 'max:191'],
+            'bussiness_email'            => [
+                'required',
+                'email',
+                'max:191',
+                Rule::unique('merchants')->ignore($this->route('merchant')),
+            ],
+            'bussiness_mobile'            => ['required', 'string', 'max:20', 'valid_phone_number', Rule::unique('merchants')->ignore($this->route('merchant')),],
+            'address'          => ['nullable', 'string'],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'valid_phone_number' => 'Invalid Mobile No. or Not Support Mobile No.',
+        ];
+    }
+
 
     /**
      * Determine if the user is authorized to make this request.

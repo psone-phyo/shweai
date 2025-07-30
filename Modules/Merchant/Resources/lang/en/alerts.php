@@ -17,7 +17,9 @@ return [
         'merchant' => [
             'created' => 'The merchant was successfully created.',
             'deleted' => 'The merchant was successfully deleted.',
-            'updated' => 'The merchant was successfully updated.'
+            'updated' => 'The merchant was successfully updated.',
+            'suspended' => 'The merchant was successfully suspended.',
+            'rejected' => 'The merchant was successfully rejected.',
         ]
     ]
 ];

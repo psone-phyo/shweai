@@ -34,7 +34,26 @@ class MerchantController extends Controller
      */
     public function index(ManageMerchantRequest $request)
     {
-        return view('merchant::index');
+        $type = 'approved';
+        return view('merchant::index', compact('type'));
+    }
+
+    public function suspendedList(ManageMerchantRequest $request)
+    {
+        $type = 'suspended';
+        return view('merchant::index', compact('type'));
+    }
+
+    public function rejectedList(ManageMerchantRequest $request)
+    {
+        $type = 'rejected';
+        return view('merchant::index', compact('type'));
+    }
+
+    public function pendingList(ManageMerchantRequest $request)
+    {
+        $type = 'pending';
+        return view('merchant::index', compact('type'));
     }
 
     /**
@@ -90,7 +109,7 @@ class MerchantController extends Controller
      */
     public function show(Merchant $merchant, ShowMerchantRequest $request)
     {
-        return view('merchant::show')->withMerchant($merchant);
+        return view('merchant::show')->withMerchant($merchant)->with('updatedUser')->with("createdUser");
     }
 
     /**
@@ -100,7 +119,18 @@ class MerchantController extends Controller
     public function destroy(Merchant $merchant)
     {
         $this->merchant->deleteById($merchant->id);
-
         return redirect()->route('admin.merchant.index')->withFlashSuccess(trans('merchant::alerts.backend.merchant.deleted'));
     }
+
+    public function suspend(Merchant $merchant){
+        $this->merchant->suspendById($merchant->id);
+        return redirect()->route('admin.merchant.suspended_list')->withFlashSuccess(trans('merchant::alerts.backend.merchant.suspended'));
+    }
+
+    public function reject(Merchant $merchant){
+        $this->merchant->rejectById($merchant->id);
+        return redirect()->route('admin.merchant.rejected_list')->withFlashSuccess(trans('merchant::alerts.backend.merchant.rejected'));
+    }
+
+
 }

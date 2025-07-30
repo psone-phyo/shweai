@@ -2,5 +2,8 @@
     "Review": true,
     "Pizza": true,
     "AppSetting": true,
-    "Merchant": true
+    "Merchant": true,
+    "Region": true,
+    "Township": true,
+    "MerchantUser": true
 }

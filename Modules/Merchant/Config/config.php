@@ -2,5 +2,5 @@
 
 return [
     'name' => 'Merchant',
-    'icon' => 'c-sidebar-nav-icon cil-link',
+    'icon' => 'c-sidebar-nav-icon fas fa-users',
 ];

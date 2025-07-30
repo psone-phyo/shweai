@@ -19,6 +19,7 @@ return [
                 'delete_error'      => 'There was a problem deleting this merchant. Please try again.',
                 'not_found'         => 'That merchant does not exist.',
                 'update_error'      => 'There was a problem updating this merchant. Please try again.',
+                'suspend_not_allowed' => 'You cannot suspend this merchant',
             ]
         ]
 ];

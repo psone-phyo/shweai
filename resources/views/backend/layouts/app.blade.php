@@ -17,6 +17,8 @@
     {{ style('assets/plugins/waitme/waitMe.min.css') }}
     <livewire:styles />
     @stack('after-styles')
+    <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@3.4.0/dist/css/coreui.min.css" rel="stylesheet">
+
 </head>
 <body class="c-app">
     @include('backend.includes.sidebar')

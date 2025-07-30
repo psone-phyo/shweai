@@ -1,0 +1,19 @@
+{
+    "name": "Region",
+    "alias": "region",
+    "description": "",
+    "keywords": [],
+    "active":1,
+    "order":0,
+    "group":2,
+    "priority": 0,
+    "providers": [
+        "Modules\\Region\\Providers\\RegionServiceProvider"
+    ],
+    "seeds": [
+    "Database\\Seeders\\RegionDatabaseSeeder"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

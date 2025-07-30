@@ -17,6 +17,10 @@ return [
             'sidebar' => [
                 'merchant' => 'Merchant Management',
                 'merchant_bin' => 'Merchant Bin',
+                'approved'  => 'Approved Merchants',
+                'pending'   => 'Pending Merchants',
+                'rejected'  => 'Rejected Merchants',
+                'suspended' => 'Suspended Merchants',
             ],
             'merchant' => [
                 'all'        => 'All Merchant',

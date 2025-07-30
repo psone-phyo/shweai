@@ -18,8 +18,8 @@ class CreateMerchantRequest extends FormRequest
             'mm_name'          => ['nullable', 'string', 'max:191'],
             'business_name'    => ['nullable', 'string', 'max:191'],
             'mm_business_name' => ['nullable', 'string', 'max:191'],
-            'email'            => ['required', 'email', 'max:191', 'unique:merchants,email'],
-            'phone'            => ['required', 'string', 'max:20', 'valid_phone_number'],
+            'bussiness_email'  => ['required', 'email', 'max:191', 'unique:merchants,bussiness_email'],
+            'bussiness_mobile'  => ['required', 'string', 'max:20', 'valid_phone_number', 'unique:merchants,bussiness_mobile'],
             'address'          => ['nullable', 'string'],
         ];
     }

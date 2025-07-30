@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use GMBF\MyanmarPhoneNumber;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,9 +27,12 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Request $request)
     {
         Paginator::useBootstrap();
+
+        $this->customValidator($request);
+
     }
 
     public function customValidator($request)
