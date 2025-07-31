@@ -78,17 +78,17 @@
                 },
                 columns: [
                     {data: 'id', name: 'id'},
-                    {data: 'merchant.bussiness_name', name: 'merchant.bussiness_name'},
+                    {data: 'merchant.business_name', name: 'merchant.business_name'},
                     {data: 'user.name', name: 'user.name'},
                     {data: 'user.email', name: 'user.email'},
-                    {data: 'mobile', name: 'mobile'},
+                    {data: 'user.mobile', name: 'user.mobile'},
                     {data: 'nrc', name: 'nrc'},
-                    {data: 'created_user.name', name: 'created_user.name'},
-                    {data: 'active', name: 'active'},
+                    {data: 'created_user.name', name: 'created_user.name', searchable: false, sortable: false},
+                    {data: 'active', name: 'active', searchable: false, sortable: false},
                     {data: 'updated_at', name: 'updated_at'},
                     {data: 'actions', name: 'actions', searchable: false, sortable: false}
                 ],
-                order: [[0, "asc"]],
+                order: [[0, "desc"]],
                 searchDelay: 500,
                 fnDrawCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                     load_plugins();

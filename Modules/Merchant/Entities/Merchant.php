@@ -19,12 +19,15 @@ class Merchant extends Model
     protected $table = Table::MERCHANTS;
 
     protected $fillable = [
-        'name',
-        'mm_name',
+        'company_name',
+        'mm_company_name',
         'business_name',
         'mm_business_name',
-        'bussiness_email',
-        'bussiness_mobile',
+        'business_email',
+        'business_mobile',
+        'registration_number',
+        'website_url',
+        'approximate_sale',
         'address',
         'status',
         'active',

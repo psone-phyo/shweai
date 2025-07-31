@@ -24,10 +24,10 @@ class CreateMerchantTable extends Migration
             $table->string('mm_business_name')->nullable();
             $table->string('registration_number');
 
-            $table->string('bussiness_email')->unique();
-            $table->string('bussiness_mobile')->unique();
+            $table->string('business_email')->unique();
+            $table->string('business_mobile')->unique();
             $table->text('address')->nullable();
-            
+
             $table->string('website_url')->nullable();
             $table->string('approximate_sale')->nullable();
 

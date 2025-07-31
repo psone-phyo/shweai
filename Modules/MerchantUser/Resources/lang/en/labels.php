@@ -38,6 +38,17 @@ return [
                         'inactive'        => "Inactive",
                         'created_by'      => 'Created User',
                         'email'            => 'Email',
+
+                        'password' => 'Password',
+                        'password_confirmation' => "Password Confirmation",
+                        'status' => 'Status',
+                        'active' => 'Active',
+                        'inactive' => "Inactive",
+                        'created_by' => 'Created User',
+                        'last_updated_by' => 'Last Updated User',
+                        'merchant' => 'Merchant',
+                        'mobile' => 'Mobile',
+                        'nrc' => 'NRC'
                     ]
                 ]
             ]

@@ -1,18 +1,19 @@
 @extends ('backend.layouts.app')
 
-@section ('title', __('merchantuser::labels.backend.merchantuser.management') . ' | ' . __('merchantuser::labels.backend.merchantuser.edit'))
+@section('title', __('merchantuser::labels.backend.merchantuser.management') . ' | ' .
+    __('merchantuser::labels.backend.merchantuser.edit'))
 
 @section('breadcrumb-links')
     @include('merchantuser::includes.breadcrumb-links')
 @endsection
 
 @push('after-styles')
-{{ style('assets/plugins/select2/css/select2.min.css') }}
-{{ style('assets/plugins/select2/css/select2-bootstrap.min.css') }}
+    {{ style('assets/plugins/select2/css/select2.min.css') }}
+    {{ style('assets/plugins/select2/css/select2-bootstrap.min.css') }}
 @endpush
 
 @section('content')
-{{ html()->modelForm($merchantuser, 'PATCH', route('admin.merchantuser.update', $merchantuser->id))->class('form-horizontal')->open() }}
+    {{ html()->modelForm($merchantUser, 'PATCH', route('admin.merchantuser.update', $merchantUser->id))->class('form-horizontal')->open() }}
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -29,30 +30,27 @@
             <div class="row mt-4 mb-4">
                 <div class="col">
 
-                    <div class="form-group row">
-                    {{ html()->label(__('merchantuser::labels.backend.merchantuser.table.name'))->class('col-md-2 form-control-label')->for('name') }}
+            {{-- Merchant --}}
+            <div class="form-group row">
+                {{ html()->label('Merchant')->class('col-md-2 form-control-label')->for('merchant_id') }}
+                <div class="col-md-10">
+                    <select name="merchant_id" class="form-control select2" required>
+                        <option value="">-- Select Merchant --</option>
+                        @foreach ($merchants as $merchant)
+                        <option value="{{ $merchant->id }}"
+                            {{ old('merchant_id', $merchantUser->merchant_id) == $merchant->id ? 'selected' : '' }}>
+                            {{ $merchant->business_name }}
+                        </option>
 
-                        <div class="col-md-10">
-                            {{ html()->text('name')
-                                ->class('form-control')
-                                ->placeholder(__('merchantuser::labels.backend.merchantuser.table.name'))
-                                ->attribute('maxlength', 191)
-                                ->required() }}
-                        </div><!--col-->
-                    </div><!--form-group-->
+                        @endforeach
+                    </select>
+                </div>
+            </div>
 
-                    <div class="form-group row">
-                    {{ html()->label(__('merchantuser::labels.backend.merchantuser.table.description'))->class('col-md-2 form-control-label')->for('description') }}
+                    @include('merchantuser::includes.merchant_user_form')
 
-                        <div class="col-md-10">
-                            {{ html()->textarea('description')
-                                ->class('form-control')
-                                ->placeholder(__('merchantuser::labels.backend.merchantuser.table.description'))
-                                ->required() }}
-                        </div><!--col-->
-                    </div><!--form-group-->
-                </div><!--col-->
-            </div><!--row-->
+                </div>
+            </div>
         </div><!--card-body-->
 
         <div class="card-footer">
@@ -67,14 +65,11 @@
             </div><!--row-->
         </div><!--card-footer-->
     </div><!--card-->
-{{ html()->closeModelForm() }}
+    {{ html()->closeModelForm() }}
 @endsection
 
 @push('after-scripts')
-{{ script('assets/plugins/select2/js/select2.full.min.js')}}
-{{ script("assets/plugins/select2/component/components-select2.js") }}
-<script>
-
-
-</script>
+    {{ script('assets/plugins/select2/js/select2.full.min.js') }}
+    {{ script('assets/plugins/select2/component/components-select2.js') }}
+    <script></script>
 @endpush

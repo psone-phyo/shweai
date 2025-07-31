@@ -2,11 +2,13 @@
 
 namespace Modules\Merchant\Http\Controllers;
 
+use GMBF\MyanmarPhoneNumber;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\Merchant\Entities\Merchant;
 
+use Illuminate\Support\Facades\DB;
+use Modules\Merchant\Entities\Merchant;
 use App\Domains\Auth\Services\UserService;
 use Modules\Merchant\Repositories\MerchantRepository;
 use Modules\Merchant\Http\Requests\ShowMerchantRequest;
@@ -78,20 +80,64 @@ class MerchantController extends Controller
      */
     public function store(CreateMerchantRequest $request)
     {
-        $user = $this->user->store([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'type' =>'user',
-        ]);
-        $merchant = $this->merchant->create($request->except('_token','_method'));
-        $this->merchant_user->create([
-            'user_id' => $user->id,
-            'merchant_id' => $merchant->id,
-            'mobile' => $request->mobile,
-            'nrc' => $request->nrc,
-        ]);
-        return redirect()->route('admin.merchant.index')->withFlashSuccess(trans('merchant::alerts.backend.merchant.created'));
+        $input = $request->except('_token','_method');
+        $phoneNumber = new MyanmarPhoneNumber();
+
+        $input['business_mobile'] = $phoneNumber->add_prefix($input['business_mobile']);
+        $input['mobile'] = $phoneNumber->add_prefix($input['mobile']);
+
+        DB::beginTransaction();
+
+        try {
+            // Create user
+            $user = $this->user->store([
+                'name' => $input['name'],
+                'email' => $input['email'],
+                'password' => $input['password'],
+                'active' => $input['active'],
+                'mobile' => $input['mobile'],
+            ]);
+
+            // Create merchant
+            $merchant = $this->merchant->create([
+                'company_name'       => $request->input('company_name'),
+                'mm_company_name'    => $request->input('mm_company_name'),
+                'business_name'      => $request->input('business_name'),
+                'mm_business_name'   => $request->input('mm_business_name'),
+                'business_email'     => $request->input('business_email'),
+                'business_mobile'    => $request->input('business_mobile'),
+                'address'            => $request->input('address'),
+                'registration_number'=> $request->input('registration_number'),
+                'latitude'           => $request->input('latitude'),
+                'longitude'          => $request->input('longitude'),
+                'website_url'        => $request->input('website_url'),
+                'approximate_sale'   => $request->input('approximate_sale'),
+                'status'             => $request->input('status'),
+                'active'             => $request->input('merchant_active'),
+            ]);
+
+            // Create merchant_user relationship
+            $this->merchant_user->create([
+                'user_id' => $user->id,
+                'merchant_id' => $merchant->id,
+                'nrc' => $input['nrc'],
+                'created_by' => auth()->id(),
+            ]);
+
+            DB::commit();
+
+            return redirect()
+                ->route('admin.merchant.index')
+                ->withFlashSuccess(trans('merchant::alerts.backend.merchant.created'));
+
+        } catch (\Throwable $e) {
+            DB::rollBack();
+
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withFlashDanger('Something went wrong while creating merchant: ' . $e->getMessage());
+        }
     }
 
     /**

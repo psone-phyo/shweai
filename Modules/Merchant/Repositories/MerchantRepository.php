@@ -79,7 +79,6 @@ class MerchantRepository extends BaseRepository
             $input['created_by'] = $userId;
             $input['approved_at'] = now();
         }
-        $input['last_updated_by'] = $userId;
         return $this->model->create($input);
     }
 

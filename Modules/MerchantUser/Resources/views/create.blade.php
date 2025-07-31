@@ -1,18 +1,19 @@
 @extends ('backend.layouts.app')
 
-@section ('title', __('merchantuser::labels.backend.merchantuser.management') . ' | ' . __('merchantuser::labels.backend.merchantuser.create'))
+@section('title', __('merchantuser::labels.backend.merchantuser.management') . ' | ' .
+    __('merchantuser::labels.backend.merchantuser.create'))
 
 @section('breadcrumb-links')
     @include('merchantuser::includes.breadcrumb-links')
 @endsection
 
 @push('after-styles')
-{{ style('assets/plugins/select2/css/select2.min.css') }}
-{{ style('assets/plugins/select2/css/select2-bootstrap.min.css') }}
+    {{ style('assets/plugins/select2/css/select2.min.css') }}
+    {{ style('assets/plugins/select2/css/select2-bootstrap.min.css') }}
 @endpush
 
 @section('content')
-{{ html()->form('POST', route('admin.merchantuser.store'))->class('form-horizontal')->open() }}
+    {{ html()->form('POST', route('admin.merchantuser.store'))->class('form-horizontal')->open() }}
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -21,61 +22,58 @@
                         {{ __('merchantuser::labels.backend.merchantuser.management') }}
                         <small class="text-muted">{{ __('merchantuser::labels.backend.merchantuser.create') }}</small>
                     </h4>
-                </div><!--col-->
-            </div><!--row-->
+                </div>
+            </div>
 
             <hr />
 
             <div class="row mt-4 mb-4">
                 <div class="col">
 
+                    {{-- Merchant --}}
                     <div class="form-group row">
-                    {{ html()->label(__('merchantuser::labels.backend.merchantuser.table.name'))->class('col-md-2 form-control-label')->for('name') }}
-
+                        {{ html()->label(__("merchantuser::labels.backend.merchantuser.table.merchant"))->class('col-md-2 form-control-label')->for('merchant_id') }}
                         <div class="col-md-10">
-                            {{ html()->text('name')
-                                ->class('form-control')
-                                ->placeholder(__('merchantuser::labels.backend.merchantuser.table.name'))
-                                ->attribute('maxlength', 191)
-                                ->required() }}
-                        </div><!--col-->
-                    </div><!--form-group-->
+                            <select name="merchant_id" class="form-control select2" required>
+                                <option value="">-- Select Merchant --</option>
+                                @foreach ($merchants as $merchant)
+                                    <option value="{{ $merchant->id }}"
+                                        {{ old('merchant_id') == $merchant->id ? 'selected' : '' }}>
+                                        {{ $merchant->business_name }}
+                                    </option>
+                                @endforeach
+                            </select>
 
-                    <div class="form-group row">
-                    {{ html()->label(__('merchantuser::labels.backend.merchantuser.table.description'))->class('col-md-2 form-control-label')->for('description') }}
+                        </div>
+                    </div>
 
-                        <div class="col-md-10">
-                            {{ html()->textarea('description')
-                                ->class('form-control')
-                                ->placeholder(__('merchantuser::labels.backend.merchantuser.table.description'))
-                                ->required() }}
-                        </div><!--col-->
-                    </div><!--form-group-->
-                </div><!--col-->
-            </div><!--row-->
-        </div><!--card-body-->
+                    @include('merchantuser::includes.merchant_user_form')
+
+                </div>
+            </div>
+        </div>
 
         <div class="card-footer">
             <div class="row">
                 <div class="col">
                     {{ form_cancel(route('admin.merchantuser.index'), __('buttons.general.cancel')) }}
-                </div><!--col-->
-
+                </div>
                 <div class="col text-right">
                     {{ form_submit(__('buttons.general.crud.create')) }}
-                </div><!--row-->
-            </div><!--row-->
-        </div><!--card-footer-->
-    </div><!--card-->
-{{ html()->closeModelForm() }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ html()->closeModelForm() }}
 @endsection
 
 @push('after-scripts')
-{{ script('assets/plugins/select2/js/select2.full.min.js')}}
-{{ script("assets/plugins/select2/component/components-select2.js") }}
+    {{ script('assets/plugins/select2/js/select2.full.min.js') }}
+    {{ script('assets/plugins/select2/component/components-select2.js') }}
 
-<script>
-
-
-</script>
+    <script>
+        $('.select2').select2({
+            theme: 'bootstrap'
+        });
+    </script>
 @endpush

@@ -63,6 +63,9 @@
                                 <th>{{ __('merchant::labels.backend.merchant.table.business_name') }}</th>
                                 <th>{{ __('merchant::labels.backend.merchant.table.email') }}</th>
                                 <th>{{ __('merchant::labels.backend.merchant.table.phone') }}</th>
+                                <th>{{ __('merchant::labels.backend.merchant.table.registration_number') }}</th>
+                                <th>{{ __('merchant::labels.backend.merchant.table.approximate_sale') }}</th>
+                                <th>{{ __('merchant::labels.backend.merchant.table.website_url') }}</th>
                                 <th>{{ __('merchant::labels.backend.merchant.table.status') }}</th>
                                 <th>{{ __('merchant::labels.backend.merchant.table.active') }}</th>
                                 <th>{{ __('merchant::labels.backend.merchant.table.created_by') }}</th>
@@ -112,10 +115,13 @@
                 },
                 columns: [
                     {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
+                    {data: 'company_name', name: 'company_name'},
                     {data: 'business_name', name: 'business_name'},
-                    {data: 'email', name: 'email'},
-                    {data: 'phone', name: 'phone'},
+                    {data: 'business_email', name: 'business_email'},
+                    {data: 'business_mobile', name: 'business_mobile'},
+                    {data: 'registration_number', name: 'registration_number'},
+                    {data: 'approximate_sale', name: 'approximate_sale'},
+                    {data: 'website_url', name: 'website_url'},
                     {data: 'status', name: 'status'},
                     {data: 'active', name: 'active'},
                     {data: 'created_user.name', name: 'created_user.name', searchable: false},
@@ -124,7 +130,7 @@
                     {data: 'updated_at', name: 'updated_at'},
                     {data: 'actions', name: 'actions', searchable: false, sortable: false}
                 ],
-                order: [[0, "asc"]],
+                order: [[0, "desc"]],
                 searchDelay: 500,
                 fnDrawCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                     load_plugins();

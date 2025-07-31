@@ -29,7 +29,7 @@ return [
                     'rejected_management'  => 'Rejected Merchant Management',
                     'rejected_list'        => 'Rejected Merchant List',
 
-                    'merchant_ownership' => 'Merchant Management Ownership Member',
+                    'merchant_ownership' => 'Merchant Ownership User',
 
                     'table' => [
                         'number_of_users' => 'Number of Merchants',
@@ -48,8 +48,8 @@ return [
                         'mm_company_name' => 'Company Name(in Burmese)',
                         'business_name' => 'Business Name',
                         'mm_business_name' => 'Bussiness Name(in Burmese)',
-                        'bussiness_email' => 'Bussiness Email',
-                        'bussiness_mobile' => "Bussiness Mobile",
+                        'business_email' => 'Business Email',
+                        'business_mobile' => "Business Mobile",
                         'email' => 'Email',
                         'phone' => 'Phone',
                         'address' => 'Address',

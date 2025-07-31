@@ -49,6 +49,12 @@ class MerchantTableController extends Controller
             ->editColumn('approved_at', function ($merchant) {
                 return $merchant->approved_at ? Carbon::parse($merchant->approved_at)->format('Y-m-d H:i:s') : '-';
             })
+            ->editColumn('approximate_sale', function ($merchant) {
+                return $merchant->apprximate_sale ?? '-';
+            })
+            ->editColumn('website_url', function ($merchant) {
+                return $merchant->website_url ?? '-';
+            })
             ->editColumn('updated_at', function ($merchant) {
                 return $merchant->updated_at->format('Y-m-d H:i:s');
             })

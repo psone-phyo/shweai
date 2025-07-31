@@ -49,6 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
         'type',
         'name',
         'email',
+        'mobile',
         'email_verified_at',
         'password',
         'password_changed_at',

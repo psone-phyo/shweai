@@ -18,9 +18,7 @@ class CreateMerchantuserTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('merchant_id');
             $table->unsignedInteger('user_id');
-            $table->string('mobile');
             $table->string('nrc');
-            $table->boolean('active')->default(1);
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();
             $table->softDeletes();

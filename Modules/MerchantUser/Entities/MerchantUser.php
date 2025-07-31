@@ -18,7 +18,7 @@ class MerchantUser extends Model
      */
     protected $table = Table::MERCHANT_USER;
 
-    protected $fillable = ["id", "merchant_id", "user_id", "mobile", "nrc", "active", "created_by"];
+    protected $fillable = ["id", "merchant_id", "user_id", "nrc", "created_by"];
 
     public function createdUser(){
         return $this->belongsTo(User::class, 'created_by');
@@ -70,7 +70,7 @@ class MerchantUser extends Model
 
     public function getStatusAttribute()
     {
-        if ($this->active) {
+        if ($this->user->active) {
             return "<span class='badge badge-success'>".__('labels.general.active').'</span>';
         }
 

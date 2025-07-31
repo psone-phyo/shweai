@@ -118,6 +118,8 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    'unique_user_phone_number' => 'The mobile number has already been taken.',
+    'unique_merchant_phone_number' => 'The merchant contact mobile number has already been taken.',
 
     /*
     |--------------------------------------------------------------------------

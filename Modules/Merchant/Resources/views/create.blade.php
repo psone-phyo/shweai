@@ -77,21 +77,21 @@
                         </div>
                     </div>
 
-                    {{-- Bussiness Email --}}
+                    {{-- Business Email --}}
                     <div class="form-group row">
-                        {{ html()->label(__('merchant::labels.backend.merchant.table.bussiness_email'))->class('col-md-2 form-control-label')->for('bussiness_email') }}
+                        {{ html()->label(__('merchant::labels.backend.merchant.table.business_email'))->class('col-md-2 form-control-label')->for('business_email') }}
 
                         <div class="col-md-10">
-                            {{ html()->email('bussiness_email')->class('form-control')->placeholder(__('merchant::labels.backend.merchant.table.bussiness_email'))->attribute('maxlength', 191)->required() }}
+                            {{ html()->email('business_email')->class('form-control')->placeholder(__('merchant::labels.backend.merchant.table.business_email'))->attribute('maxlength', 191)->required() }}
                         </div>
                     </div>
 
-                    {{-- Bussiness Phone --}}
+                    {{-- Business Phone --}}
                     <div class="form-group row">
-                        {{ html()->label(__('merchant::labels.backend.merchant.table.bussiness_mobile'))->class('col-md-2 form-control-label')->for('bussiness_mobile') }}
+                        {{ html()->label(__('merchant::labels.backend.merchant.table.business_mobile'))->class('col-md-2 form-control-label')->for('business_mobile') }}
 
                         <div class="col-md-10">
-                            {{ html()->text('bussiness_mobile')->class('form-control')->placeholder(__('merchant::labels.backend.merchant.table.bussiness_mobile'))->attribute('maxlength', 20)->required() }}
+                            {{ html()->text('business_mobile')->class('form-control')->placeholder(__('merchant::labels.backend.merchant.table.business_mobile'))->attribute('maxlength', 20)->required() }}
                         </div>
                     </div>
 
@@ -135,7 +135,7 @@
                         {{ html()->label(__('merchant::labels.backend.merchant.table.website_url'))->class('col-md-2 form-control-label')->for('website_url') }}
 
                         <div class="col-md-10">
-                            {{ html()->text('website_url')->class('form-control')->placeholder(__('merchant::labels.backend.merchant.table.website_url'))->required() }}
+                            {{ html()->text('website_url')->class('form-control')->placeholder(__('merchant::labels.backend.merchant.table.website_url')) }}
                         </div>
                     </div>
 
@@ -144,7 +144,7 @@
                         {{ html()->label(__('merchant::labels.backend.merchant.table.approximate_sale'))->class('col-md-2 form-control-label')->for('approximate_sale') }}
 
                         <div class="col-md-10">
-                            {{ html()->text('approximate_sale')->class('form-control')->placeholder(__('merchant::labels.backend.merchant.table.approximate_sale'))->required() }}
+                            {{ html()->text('approximate_sale')->class('form-control')->placeholder(__('merchant::labels.backend.merchant.table.approximate_sale')) }}
                         </div>
                     </div>
 
@@ -168,7 +168,7 @@
                     </div>
 
                     <h4 class="mt-2">{{ __("merchant::labels.backend.merchant.merchant_ownership") }}</h4>
-                        @include('merchant::includes.ownership')
+                        @include('merchantuser::includes.merchant_user_form')
                 </div>
 
             </div><!--row-->

@@ -20,12 +20,12 @@
         <table class="table table-striped table-bordered table-hover table-full-width" id="sample_2">
             <tbody>
                 <tr>
-                    <th>{{ __('merchant::labels.backend.merchant.table.name') }}</th>
-                    <td>{{ $merchant->name }}</td>
+                    <th>{{ __('merchant::labels.backend.merchant.table.company_name') }}</th>
+                    <td>{{ $merchant->company_name }}</td>
                 </tr>
                 <tr>
-                    <th>{{ __('merchant::labels.backend.merchant.table.mm_name') }}</th>
-                    <td>{{ $merchant->mm_name }}</td>
+                    <th>{{ __('merchant::labels.backend.merchant.table.mm_company_name') }}</th>
+                    <td>{{ $merchant->mm_company_name }}</td>
                 </tr>
                 <tr>
                     <th>{{ __('merchant::labels.backend.merchant.table.business_name') }}</th>
@@ -36,28 +36,48 @@
                     <td>{{ $merchant->mm_business_name }}</td>
                 </tr>
                 <tr>
-                    <th>{{ __('merchant::labels.backend.merchant.table.email') }}</th>
-                    <td>{{ $merchant->email }}</td>
+                    <th>{{ __('merchant::labels.backend.merchant.table.business_email') }}</th>
+                    <td>{{ $merchant->business_email }}</td>
                 </tr>
                 <tr>
-                    <th>{{ __('merchant::labels.backend.merchant.table.phone') }}</th>
-                    <td>{{ $merchant->phone }}</td>
+                    <th>{{ __('merchant::labels.backend.merchant.table.business_mobile') }}</th>
+                    <td>{{ $merchant->business_mobile }}</td>
+                </tr>
+                <tr>
+                    <th>{{ __('merchant::labels.backend.merchant.table.registration_number') }}</th>
+                    <td>{{ $merchant->registration_number }}</td>
+                </tr>
+                <tr>
+                    <th>{{ __('merchant::labels.backend.merchant.table.website_url') }}</th>
+                    <td>{{ $merchant->website_url }}</td>
+                </tr>
+                <tr>
+                    <th>{{ __('merchant::labels.backend.merchant.table.approximate_sale') }}</th>
+                    <td>{{ $merchant->approximate_sale }}</td>
                 </tr>
                 <tr>
                     <th>{{ __('merchant::labels.backend.merchant.table.address') }}</th>
                     <td>{!! nl2br(e($merchant->address)) !!}</td>
                 </tr>
                 <tr>
+                    <th>{{ __('merchant::labels.backend.merchant.table.latitude') }}</th>
+                    <td>{{ $merchant->latitude }}</td>
+                </tr>
+                <tr>
+                    <th>{{ __('merchant::labels.backend.merchant.table.longitude') }}</th>
+                    <td>{{ $merchant->longitude }}</td>
+                </tr>
+                <tr>
                     <th>{{ __('merchant::labels.backend.merchant.table.created_by') }}</th>
-                    <td>{{ $merchant->createdUser->name }}</td>
+                    <td>{{ $merchant->createdUser->name ?? '-' }}</td>
                 </tr>
                 <tr>
                     <th>{{ __('merchant::labels.backend.merchant.table.last_updated_by') }}</th>
-                    <td>{{ $merchant->updatedUser->name }}</td>
+                    <td>{{ $merchant->updatedUser->name ?? '-' }}</td>
                 </tr>
                 <tr>
                     <th>{{ __('merchant::labels.backend.merchant.table.approved_at') }}</th>
-                    <td>{{ Carbon\Carbon::parse($merchant->approved_at)->format('Y-m-d h:i A') }}</td>
+                    <td>{{ optional($merchant->approved_at)->format('Y-m-d h:i A') }}</td>
                 </tr>
                 <tr>
                     <th>{{ __('merchant::labels.backend.merchant.table.status') }}</th>
@@ -75,6 +95,7 @@
                 </tr>
             </tbody>
         </table>
+
 
     </div><!--card-body-->
 

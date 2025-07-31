@@ -4,6 +4,7 @@ namespace Modules\Merchant\Http\Requests;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use LangleyFoxall\LaravelNISTPasswordRules\PasswordRules;
 
 class UpdateMerchantRequest extends FormRequest
 {
@@ -13,38 +14,39 @@ class UpdateMerchantRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
-        return [
-            'name'             => ['required', 'string', 'max:191'],
-            'mm_name'          => ['nullable', 'string', 'max:191'],
-            'business_name'    => ['nullable', 'string', 'max:191'],
-            'mm_business_name' => ['nullable', 'string', 'max:191'],
-            'bussiness_email'            => [
-                'required',
-                'email',
-                'max:191',
-                Rule::unique('merchants')->ignore($this->route('merchant')),
-            ],
-            'bussiness_mobile'            => ['required', 'string', 'max:20', 'valid_phone_number', Rule::unique('merchants')->ignore($this->route('merchant')),],
-            'address'          => ['nullable', 'string'],
-        ];
-    }
+{
+    $merchantId = $this->route('merchant')->id ?? null;
 
-    public function messages()
-    {
-        return [
-            'valid_phone_number' => 'Invalid Mobile No. or Not Support Mobile No.',
-        ];
-    }
+    return [
+        'company_name'        => ['required', 'string', 'max:191'],
+        'mm_company_name'     => ['nullable', 'string', 'max:191'],
+        'business_name'       => ['nullable', 'string', 'max:191'],
+        'mm_business_name'    => ['nullable', 'string', 'max:191'],
+        'business_email'     => [
+            'required',
+            'email',
+            'max:191',
+            'unique:merchants,business_email,' . $merchantId,
 
+        ],
+        'business_mobile'    => [
+            'required',
+            'string',
+            'max:20',
+            'valid_phone_number',
+            'unique_merchant_phone_number:' . $merchantId,
+        ],
+        'address'             => ['nullable', 'string'],
+        'registration_number' => ['required'],
+    ];
+}
 
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return auth()->user()->can('admin.access.merchant.edit');
-    }
+public function messages()
+{
+    return [
+        'valid_phone_number' => 'Invalid Mobile No. or Not Support Mobile No.',
+        'roles.*.exists' => __('One or more roles were not found or are not allowed to be associated with this user type.'),
+        'permissions.*.exists' => __('One or more permissions were not found or are not allowed to be associated with this user type.'),
+    ];
+}
 }

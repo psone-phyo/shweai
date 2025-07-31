@@ -33,7 +33,13 @@ class MerchantUserTableController extends Controller
             ->addColumn('actions', function ($merchantuser) {
                 return $merchantuser->action_buttons;
             })
-            ->rawColumns(['actions'])
+            ->addColumn('active', function ($merchantuser) {
+                return $merchantuser->status;
+            })
+            ->editColumn('updated_at', function ($merchantuser){
+                return $merchantuser->updated_at->format('Y-m-d H:i:s');
+            })
+            ->rawColumns(['actions', 'active'])
             ->make(true);
     }
 }

@@ -42,7 +42,7 @@ class MerchantUserRepository extends BaseRepository
      */
     public function getForDataTable()
     {
-        return $this->model
+        return $this->model->with('merchant')->with('user')->with('createdUser')
             ->select('*');
     }
 }
